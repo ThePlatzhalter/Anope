@@ -12,11 +12,8 @@ WORKDIR anope
 RUN printf "/anope\n\n\n\n\ny\n\n\n\n" | ./Config -nocache -nointro
 WORKDIR build
 RUN make && make install
-RUN mkdir /db
-RUN touch /db/anope.db
-RUN ln -s /db/anope.db /anope/data/anope.db
 
-VOLUME ["/anope/conf", "/db"]
+VOLUME ["/anope/conf", "/anope/data"]
 
 ENTRYPOINT ["/anope/bin/services"]
 CMD ["--nofork"]
