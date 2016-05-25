@@ -8,11 +8,12 @@ RUN apt-get update
 RUN apt-get -y install cmake g++
 WORKDIR /src
 RUN tar -xvf anope-*-source.tar.gz
-RUN mv `ls -d anope-*-source` anope
+RUN mv `ls -d anope-*-source/` anope
 WORKDIR anope
 RUN printf "/anope\n\n\n\n\ny\n\n\n\n" | ./Config -nocache -nointro
 WORKDIR build
-RUN make && make install
+RUN make
+RUN make install
 RUN rm -rf /src
 
 VOLUME ["/anope/conf", "/anope/data"]
